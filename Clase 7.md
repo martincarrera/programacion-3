@@ -89,15 +89,27 @@ Pseudocodigo
 44) Formula del tarda considerando el N com la longitud de la secuencia
 
 ```
-T(N) = C                    si n = 0
-       2 * T(N-1) + C       si n > 0
+T(N) = C                      si n = 0
+       2 * T(N - 1) + C       si n > 0
 ```
 
 Tarea: Induccion de esa formula
 
 ```
-T(N) = C                    si n = 0
-       2 * T(N-1) + C       si n > 0
+T(N) = 2 * T(N - 1) + C
+     = 2 * (2 * T(N - 2) + C) + C
+     = 4 * T(N - 2) + 3C
+     .
+     .
+     .
+T(K) = 2^K * T(N - K) + (2^K - 1) * C
+     
+     N - K = 0 => N = K
+     
+     = 2^N * T(0) + (2^N - 1) * C
+     = 2^N * C + (2^N - 1) * C
+    
+    O(N) = 2^N => Exponencial
 ```
 
 45) Dado un almacenamiento de capacidad C y una secuencia de tamaños de archivos S, determinar el minimo espacio que me queda con la combinacion optima.
