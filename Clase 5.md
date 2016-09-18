@@ -71,45 +71,37 @@ Algoritmo
  Dijkstra
 Entrada
  Grafo G
- Vertice origen V
+ Vertice origen O
 Salida
- Tupla con ambos diccionarios
+ Tupla (dicPesoAcum, dicAnt)
 
 Pseudocodigo
 
  dicPesoAcum: Vertice --> pesoAcum
  dicAnte: Vertice --> verticeAnt
- conjuntoVisitados <-- {}
+ conjVisitados <-- {}
  
  para cada v en G
   dicPesosAcum(v) <-- inf
   dicAnte(v) <-- indef
  fin para
- dicPesosAcum(V) <-- 0
+ dicPesosAcum(O) <-- 0
 
-
-mientras #visitados < #GV
- pesoNuevo <-- 0
- para cada A de GA
-  si A.origen == vert
-   pesoNuevo <-- pesoAcum(A.origen) + A.peso
-   si pesoNuevo < pesoAcum(A.destino)
-    pesoAcum(A.destino) <-- pesoNuevo
+ mientras #conjVisitados < #G.V
+  VMenor <-- inf
+  para cada clave en dicPesoAcum
+   si dicPesoAcum(clave) < VMenor y clave no pertenece conjVisitados
+    VMenor <-- dicPesoAcum(clave)
    fin si
-  fin si
- fin para
- 
- menor <-- inf
- V <-- indef
- 
- para cada vert en dicPesoAcum
-  si dicPesoAcum(vert) < menor
-   menor <-- dicPesoAcum(vert)
-   V <-- vert
-  fin si
- fin para
-fin mientras
-devolver tupla con ambos diccionarios
+  fin para
+  para cada a en G.A
+   si a.origen = VMenor y dicPesoAcum(a.destino) < (dicPesoAcum(a.origen) + a.peso)
+    dicAnt(A.destino) <-- a.origen
+   fin si
+  fin para
+  conjVisitados <-- conjVisitados + {VMenor}
+ fin mientras
+ devolver (dicPesoAcum, dicAnt)
 ```
 
 Tarea: Calcular complejidad de dijkstra
