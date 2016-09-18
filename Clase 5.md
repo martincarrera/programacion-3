@@ -81,30 +81,40 @@ Pseudocodigo
  dicAnte: Vertice --> verticeAnt
  conjVisitados <-- {}
  
- para cada v en G
-  dicPesosAcum(v) <-- inf
-  dicAnte(v) <-- indef
+ para cada v en G.V                          V
+  dicPesosAcum(v) <-- inf                    C1
+  dicAnte(v) <-- indef                       C2
  fin para
- dicPesosAcum(O) <-- 0
+ dicPesosAcum(O) <-- 0                       C3
 
- mientras #conjVisitados < #G.V
-  VMenor <-- inf
-  para cada clave en dicPesoAcum
-   si dicPesoAcum(clave) < VMenor y clave no pertenece conjVisitados
-    VMenor <-- dicPesoAcum(clave)
+ mientras #conjVisitados < #G.V              V
+  VMenor <-- inf                             C4
+  para cada clave en dicPesoAcum             V
+   si dicPesoAcum(clave) < VMenor y clave no pertenece conjVisitados C5
+    VMenor <-- dicPesoAcum(clave)            C6
    fin si
   fin para
-  para cada a en G.A
-   si a.origen = VMenor y dicPesoAcum(a.destino) < (dicPesoAcum(a.origen) + a.peso)
-    dicAnt(A.destino) <-- a.origen
+  para cada a en G.A                         A
+   si a.origen = VMenor y dicPesoAcum(a.destino) < (dicPesoAcum(a.origen) + a.peso) C7
+    dicAnt(A.destino) <-- a.origen           C8
    fin si
   fin para
-  conjVisitados <-- conjVisitados + {VMenor}
+  conjVisitados <-- conjVisitados + {VMenor}  C9
  fin mientras
  devolver (dicPesoAcum, dicAnt)
 ```
 
 Tarea: Calcular complejidad de dijkstra
+
+```
+T(V, A) = V * (C1 + C2) + C3 + V * (C4 + V * (C5 + C6) + A * (C7 + C8) + C9)
+        = V * C12 + C3 + V * (C4 + V * C56 + A * C78 + C9)
+        = V * C12 + C3 + V * C4 + V * V * C56 + V * A * C78 + V * C9
+        = V * V * C56 + V * A * C78 + V * (C12 + C4 + C9) + C3
+        = V * V * C56 + V * A * C78 + V * C1249 + C3
+
+=> O(V^2 + V*A)
+```
 
 Complejidad de algoritmos de grafos:
 
