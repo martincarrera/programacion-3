@@ -89,20 +89,31 @@ Salida
   Grafo st(V, A) con los caminos minimos
 
 Pseudocodigo
-  part <-- InicializarDiccionario(G(V, A))
+  // Se podria haber hecho llamando a InicializarDiccionario asi:
+  // part <-- InicializarDiccionario(G(V, A))
+  i <-- 1
+  part: vert --> particion
+  para cada vertice de G.V                     V
+    part(vert) <-- i                           C1
+    i++                                        C2
+  fin para
+
   st <-- (V: G.V, A: [])
-  aristas <-- OrdenarAristas(G.A)
+  aristas <-- OrdenarAristas(G.A)             // No se la complejidad de este algoritmo, no lo tengo en cuenta
   
-  para cada arista en aristas
-    si (part(A.origen) != part(A.destino))
-      UnirParticiones(part, arista)
-      st.A <-- st.A + arista
+  para cada arista en aristas                  A
+    si (part(A.origen) != part(A.destino))     C3
+      UnirParticiones(part, arista)            V
+      st.A <-- st.A + arista                   C4
     fin si
   fin para
   
   devolver st
 
-Complejidad de Kruskal: O(A) => Siempre recorro todas las aristas del grafo.
+T(V, A) = V * (C1 + C2) + A * (C3 + V + C4)
+        = V * C12 + A * V * C34
+        
+O(V, A) => O(A*V)
 ```
 
 ### Primm
@@ -129,16 +140,23 @@ Pseudocodigo
   st <-- (V: G.V, A: [])
   origen <-- {V}
   
-  mientras #origen !== #G.V
-    min <-- inf
-    para cada arista en G.A
-      si (A.origen pertenece origen && A.destino !pertenece origen && A.valor < min.valor)
-        min <-- A
+  mientras #origen !== #G.V                           V
+    min <-- inf                                       C1
+    para cada arista en G.A                           A
+      si (A.origen pertenece origen && A.destino !pertenece origen && A.valor < min.valor)      C2
+        min <-- A                                     C3
       fin si
     fin para
-    origen <-- origen + min.destino
-    st.A <-- st.A + min
+    origen <-- origen + min.destino                   C4
+    st.A <-- st.A + min                               C5
   fin mientras
   
   devolver st
+  
+T(V, A) = V * (C1 + A * (C2 + C3) + C4 + C5)
+        = V * (C1 + A * C23 + C45)
+        = V * (C145 + A * C23)
+        = V * C145 + V * A * C23
+
+O(V, A) = (V * A)
 ```
