@@ -1,5 +1,3 @@
-Esteban Calabria - esteban.calabria@gmail.com
-
 ## Forma
 
 * Parcial (con recuperatorio)
