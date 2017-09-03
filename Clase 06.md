@@ -141,9 +141,9 @@ Pseudocodigo
   origen <-- {V}
   
   mientras #origen !== #G.V                           V
-    min <-- inf                                       C1
+    min <-- (origen: indef, destino: indef, peso: inf)C1
     para cada arista en G.A                           A
-      si (A.origen pertenece origen && A.destino !pertenece origen && A.valor < min.valor)      C2
+      si (A.origen pertenece origen && A.destino !pertenece origen && A.valor < min.peso)      C2
         min <-- A                                     C3
       fin si
     fin para
