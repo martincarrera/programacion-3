@@ -140,7 +140,7 @@ Pseudocodigo
   st <-- (V: G.V, A: [])
   conjuntoOrigen <-- {V}
   
-  mientras #conjuntoOrigen !== #G.V                           V
+  mientras #conjuntoOrigen !== #G.V                   V
     min <-- (origen: indef, destino: indef, peso: inf)C1
     para cada arista en G.A                           A
       si (arista.origen pertenece conjuntoOrigen && 
@@ -149,7 +149,7 @@ Pseudocodigo
         min <-- arista                                C3
       fin si
     fin para
-    conjuntoOrigen <-- conjuntoOrigen + min.destino                   C4
+    conjuntoOrigen <-- conjuntoOrigen + min.destino   C4
     st.A <-- st.A + min                               C5
   fin mientras
   
