@@ -138,16 +138,18 @@ Salida
   
 Pseudocodigo
   st <-- (V: G.V, A: [])
-  origen <-- {V}
+  conjuntoOrigen <-- {V}
   
-  mientras #origen !== #G.V                           V
+  mientras #conjuntoOrigen !== #G.V                           V
     min <-- (origen: indef, destino: indef, peso: inf)C1
     para cada arista en G.A                           A
-      si (A.origen pertenece origen && A.destino !pertenece origen && A.valor < min.peso)      C2
+      si (arista.origen pertenece conjuntoOrigen && 
+          arista.destino no pertenece conjuntoOrigen && 
+          A.valor < min.peso)      C2
         min <-- A                                     C3
       fin si
     fin para
-    origen <-- origen + min.destino                   C4
+    conjuntoOrigen <-- conjuntoOrigen + min.destino                   C4
     st.A <-- st.A + min                               C5
   fin mientras
   
