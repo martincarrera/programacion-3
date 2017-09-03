@@ -143,7 +143,7 @@ Pseudocodigo
  para cada V de G.V             V1
   suma <- 0                     C2
   para cada A de G.A            A
-  si (A.origen) o (A.destino=0) C3
+  si (A.origen == V) o (A.destino == V) C3
    suma <- suma + A.peso        C4
   fin si
  fin para
