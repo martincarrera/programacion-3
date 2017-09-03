@@ -42,7 +42,7 @@ Pseudocodigo
  fin para
 ```
 
-32) Dado un grafo G y un vertice origen V, fragmento de pseudocodigo que actualice el peso acumulado de los adyacentes usando la funcion min
+33) Dado un grafo G y un vertice origen V, fragmento de pseudocodigo que actualice el peso acumulado de los adyacentes usando la funcion min
 
 ```
 Algoritmo
@@ -88,18 +88,20 @@ Pseudocodigo
  dicPesosAcum(O) <-- 0                       C3
 
  mientras #conjVisitados < #G.V              V
-  VMenor <-- inf                             C4
+  VMenor <-- (vertice: indef, peso: infinito)C4
   para cada clave en dicPesoAcum             V
-   si dicPesoAcum(clave) < VMenor y clave no pertenece conjVisitados C5
-    VMenor <-- dicPesoAcum(clave)            C6
+   si dicPesoAcum(clave) < VMenor.peso y clave no pertenece conjVisitados C5
+    VMenor.peso <-- dicPesoAcum(clave)       C6
+    VMenor.vertice <-- clave                 C6
    fin si
   fin para
   para cada a en G.A                         A
-   si a.origen = VMenor y dicPesoAcum(a.destino) < (dicPesoAcum(a.origen) + a.peso) C7
-    dicAnt(A.destino) <-- a.origen           C8
+   si a.origen = VMenor.vertice y dicPesoAcum(a.destino) > (dicPesoAcum(a.origen) + a.peso) C7
+    dicAnt(a.destino) <-- a.origen           C8
+    dicPesoAcum(a.destino) <-- dicPesoAcum(a.origen) + a.peso   C8
    fin si
   fin para
-  conjVisitados <-- conjVisitados + {VMenor}  C9
+  conjVisitados <-- conjVisitados + {VMenor.vertice}  C9
  fin mientras
  devolver (dicPesoAcum, dicAnt)
 ```
