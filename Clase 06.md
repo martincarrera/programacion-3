@@ -145,8 +145,8 @@ Pseudocodigo
     para cada arista en G.A                           A
       si (arista.origen pertenece conjuntoOrigen && 
           arista.destino no pertenece conjuntoOrigen && 
-          A.valor < min.peso)      C2
-        min <-- A                                     C3
+          arista.peso < min.peso)                     C2
+        min <-- arista                                C3
       fin si
     fin para
     conjuntoOrigen <-- conjuntoOrigen + min.destino                   C4
