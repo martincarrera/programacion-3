@@ -102,7 +102,7 @@ Pseudocodigo
   aristas <-- OrdenarAristas(G.A)             // No se la complejidad de este algoritmo, no lo tengo en cuenta
   
   para cada arista en aristas                  A
-    si (part(A.origen) != part(A.destino))     C3
+    si (part(arista.origen) != part(arista.destino))     C3
       UnirParticiones(part, arista)            V
       st.A <-- st.A + arista                   C4
     fin si
