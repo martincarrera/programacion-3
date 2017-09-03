@@ -19,10 +19,10 @@ Salida
 Pseudocodigo
   N <- 0
   para cada el en S[1 ... infinito]
-    N <- N + M / S[el]
-    M <- M - S[el] * M / S[el]
+    N <- N + M / el
+    M <- M - el * M / el
     si M == 0
-      el <- infinito
+      el <- S[infinito]
    fin si
   fin para
   devolver N
