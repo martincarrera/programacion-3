@@ -21,24 +21,31 @@ Salida
 
 Pseudocodigo
 ```
-        res <-- (-infinito, colores) // incialmente el diccionario de colores tiene todos seteados en indefinido
-        para cada vertice en Sc
-            para cada color en S
-                colores(vertice) <-- color
-                si (verificarGrafo(G(V, A)))
-                    color <-- S[+infinito] // finalizo el para de colores
-                    Sc <-- Sc[2 .. +infinito] // Quito el vertice de Sc porque ya lo pinte
-                sino
-                    colores(vertice) <-- indefinido
-                fin si
-            fin para
+res <- (cantidadColores: inf, colores)
+
+si #Sc = 0 y verificarGrafo(G, colores) es falso
+    devolver (cantidad: #contarColores(colores), colores: colores)
+fin si
+
+para cada color en S
+
+    colores(V) <- color
+
+    si verificarGrafo(G, colores) es falso
+    
+        para cada nodo M adyacente a V en G
+            sol <- colorearGrafo(G, M, S, colores, Sc - [V])
+
+            si sol.cantidadColores < res.cantidadColores
+                res <- sol
+            fin si
         fin para
-        c <-- contarColores(colores)
-        si #C == 0
-            devolver res
-        sino
-            devolver (#C, colores)
-        fin si
+
+    fin si
+
+fin para
+
+devolver res
 ```
 
 ## 2 - Ejercicio Backtracking (3 puntos)
