@@ -58,19 +58,37 @@ Salida
 
 Pseudocodigo
 ```
-    si N = 1
-        para cada L en S
-            Salida <-- Salida + L // (1)
-        fin para
-    sino
-        para cada L en S
-            aux <-- permutacionesLetras(S, N-1, []) // (2)
-            para cada A en aux
-                Salida <-- Salida + [L + A] // (3)
-            fin para
-        fin para
-    fin si
-    devolver Salida
+res <- [][]
+
+// Si el dominio esta vacio...
+si #S == 0
+    devolver res
+fin si
+
+// Si el candidato tiene el largo necesario
+Si #Sc == N
+    devolver res + [Sc]
+fin si
+
+// Si todavia no llegamos al largo
+// Este bloque es si [A B] == [B A]
+si #Sc < N
+    res <- res + PermutacionLetras(S[2...inf], N, Sc + [S[1]])
+    res <- res + PermutacionLetras(S[2...inf], N, Sc)
+fin si
+
+// Este bloque es si [AA] es valido y [A B] != [B A]
+para cada letra en S
+    res <- res + PermutacionLetras(dominio, N, Sc + [letra])
+fin para
+
+// Si [AA] es invalido, pero [A B] != [B A]
+para cada letra en S
+    // Hay que sacar la letra actual del dominio que pasamos
+    res <- res + PermutacionLetras(dominio - [letra], N, Sc + [letra])
+fin para
+
+devolver res
 ```
 Notas: 
 
